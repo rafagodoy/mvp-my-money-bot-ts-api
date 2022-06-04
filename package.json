@@ -1,0 +1,33 @@
+{
+  "name": "remessa-voice-api",
+  "version": "1.0.0",
+  "description": "A service API to integrate remittances and payments by voice recognition",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafael-godoy-remessa-online/remessa-voice-api.git"
+  },
+  "author": "Rafael Godoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafael-godoy-remessa-online/remessa-voice-api/issues"
+  },
+  "homepage": "https://github.com/rafael-godoy-remessa-online/remessa-voice-api#readme",
+  "dependencies": {
+    "serverless-offline": "^8.8.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^24.0.15",
+    "axios": "^0.19.0",
+    "jest": "^24.8.0",
+    "serverless-plugin-typescript": "^1.1.7",
+    "serverless-stack-output": "^0.2.3",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0"
+  }
+}
