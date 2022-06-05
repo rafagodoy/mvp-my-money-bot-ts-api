@@ -23,11 +23,13 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
     "axios": "^0.19.0",
+    "eslint": "^8.17.0",
     "jest": "^24.8.0",
     "serverless-plugin-typescript": "^1.1.7",
     "serverless-stack-output": "^0.2.3",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0"
+    "ts-jest": "^24.0.2"
   }
 }
