@@ -5,11 +5,11 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "removeComments": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "target": "es2020",
       "outDir": "dist",
       "esModuleInterop": true,
-      "resolveJsonModule": true
+      "resolveJsonModule": true,
     },
     "include": [
       "src/**/*.ts"
