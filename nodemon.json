@@ -1,0 +1,13 @@
+{
+  "restartable": "rs",
+  "verbose": true,
+  "ignore": ["*.test.js", "fixtures/*"],
+  "ext": "ts,json",
+  "events": {
+    "restart": "rm -r ./dist/* && tsc"
+  },
+  "watch": [
+    "src"
+  ],
+  "exec": "sls offline"
+}
