@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+   {
+    "name": "remessa-voice-debug",
+    "type": "node",
+    "request": "launch",
+    "cwd": "${workspaceRoot}",
+    "runtimeExecutable": "npm",
+    "runtimeArgs": [
+     "run-script",
+     "debug"
+    ],
+    "port": 4000
+   }
+  ]
+ }

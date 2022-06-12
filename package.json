@@ -8,7 +8,8 @@
     "clear": "rm -r ./dist/*",
     "lint": "eslint . --ext .ts --fix",
     "build": "yarn clear && tsc",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "debug": "export SLS_DEBUG=* && sls offline start"
   },
   "repository": {
     "type": "git",
