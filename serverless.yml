@@ -7,8 +7,10 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  hello:
-    handler: handler.hello
+  currencyQuotes:
+    handler: dist/main/handlers.currencyQuotes
+    events:
+      - httpApi: 'GET /quotes/currencies/{currencyId}'
 
 plugins:
   - serverless-offline
