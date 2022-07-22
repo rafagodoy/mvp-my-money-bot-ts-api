@@ -15,7 +15,18 @@
   },
   "rules": {
     "import/extensions": 0,
+    "naming-convention": 0,
     "import/no-extraneous-dependencies": 0,
-    "no-multiple-empty-lines": [2, {"max": 1, "maxEOF": 1}]
+    "no-multiple-empty-lines": [2, {"max": 1, "maxEOF": 1}],
+    "max-len": ["error", { "comments": 100, "code": 100 }],
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": ["variable", "function"],
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
+      }
+    ]
   }
 }
