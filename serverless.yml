@@ -1,6 +1,6 @@
 service: remessa-voice-api
 
-frameworkVersion: '3'
+frameworkVersion: '2.72.3'
 
 provider:
   name: aws
@@ -10,7 +10,7 @@ functions:
   currencyQuotes:
     handler: dist/main/handlers.currencyQuotes
     events:
-      - httpApi: 'GET /quotes/currencies/{currencyId}'
+      - httpApi: 'POST /quotes/currencies/{currencyId}'
 
 plugins:
   - serverless-offline
