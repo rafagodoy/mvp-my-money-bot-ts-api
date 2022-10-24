@@ -1,13 +1,11 @@
+import { AWSLambdaAdapter } from './aws-lambda.adapter';
+import { makeConvertCurrencyController } from './factories/convert-currency.factory';
+
 module.exports.currencyQuotes = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v3.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2,
-    ),
-  };
+
+  const controller = makeConvertCurrencyController();
+  const awsLambda = new AWSLambdaAdapter(controller);
+
+  return awsLambda.start(event);
+  
 };
