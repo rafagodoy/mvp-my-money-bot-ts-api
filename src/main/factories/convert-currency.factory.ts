@@ -1,6 +1,6 @@
 import { ConvertCurrencyController } from '@/presentation/controllers/ConvertCurrencyController';
-import { ApiConvertCurrencyAdapter } from '@/adapters/api/convert-currency.adapter';
-import { MoneeApi } from '@/infra/api';
+import { ApiConvertCurrencyAdapter } from '@/adapters/apis/convert-currency.adapter';
+import { MoneeApi } from '@/infra/apis';
 import { NodeFetch } from '@/infra/libs';
 
 const nodeFetch = new NodeFetch();

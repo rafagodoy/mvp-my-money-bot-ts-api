@@ -1,6 +1,6 @@
 import { NodeFetch } from '../libs/node-fetch';
 import { MoneeApiResponse } from './protocols/monee-api.protocols';
-import { ConvertCurrencyAPI, ConvertCurrencyAPIRequest } from '@/adapters/api/protocols';
+import { ConvertCurrencyAPI, ConvertCurrencyAPIRequest } from '@/adapters/apis/protocols';
 
 export class MoneeApi implements ConvertCurrencyAPI {
   private readonly urlAPI = 'http://demo8373629.mockable.io';

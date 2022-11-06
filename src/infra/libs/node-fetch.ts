@@ -1,4 +1,4 @@
-import { API, APIRequest, APIResponse } from '@/adapters/api/protocols';
+import { API, APIRequest, APIResponse } from '@/adapters/apis/protocols';
 import fetch from 'node-fetch';
 
 export class NodeFetch implements API {
