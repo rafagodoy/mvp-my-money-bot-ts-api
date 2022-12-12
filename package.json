@@ -1,5 +1,5 @@
 {
-  "name": "remessa-voice-api",
+  "name": "mvp-my-money-bot-ts-api",
   "version": "1.0.0",
   "description": "A service API to integrate remittances and payments by voice recognition",
   "main": "handler.js",
@@ -10,19 +10,24 @@
     "lint": "eslint . --ext .ts --fix",
     "build": "yarn clear && tsc && tsc-alias",
     "start:dev": "nodemon",
-    "debug": "export SLS_DEBUG=* && yarn clear && tsc && tsc-alias && sls offline start"
+    "debug": "export SLS_DEBUG=* && yarn clear && tsc && tsc-alias && sls offline start",
+    "start:ngrok": "ngrok http 3001",
+    "deploy:alexa-skill": "ask deploy --profile user-alexa"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafael-godoy-remessa-online/remessa-voice-api.git"
+    "url": "git+https://github.com/rafagodoy/mvp-my-money-bot-ts-api.git"
   },
   "author": "Rafael Godoy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rafael-godoy-remessa-online/remessa-voice-api/issues"
+    "url": "https://github.com/rafagodoy/mvp-my-money-bot-ts-api/issues"
   },
-  "homepage": "https://github.com/rafael-godoy-remessa-online/remessa-voice-api#readme",
+  "homepage": "https://github.com/rafagodoy/mvp-my-money-bot-ts-api#readme",
   "dependencies": {
+    "ask-sdk-core": "^2.12.1",
+    "ask-sdk-model": "^1.39.0",
+    "aws-sdk": "^2.1255.0",
     "node-fetch": "^2.6.6",
     "serverless-offline": "^8.8.0",
     "typescript": "^3.5.3"
@@ -33,6 +38,7 @@
     "@types/node-fetch": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
+    "ask-sdk-local-debug": "^1.1.0",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "jest": "^24.8.0",
