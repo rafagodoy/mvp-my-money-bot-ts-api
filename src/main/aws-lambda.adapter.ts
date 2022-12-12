@@ -1,9 +1,9 @@
-import { Controller, HttpResponse } from '@/presentation/protocols';
+import { HttpController, HttpResponse } from '@/presentation/protocols';
 
 export class AWSLambdaAdapter {
   
   constructor(
-    private readonly controller: Controller,
+    private readonly controller: HttpController,
   ) {}
   
   async start(event: any): Promise<HttpResponse> {
