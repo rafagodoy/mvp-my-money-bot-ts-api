@@ -1,0 +1,30 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "pt-BR": {
+          "summary": "Sample Short Description",
+          "examplePhrases": [
+            "Alexa abrir my money bot",
+            "ola",
+            "ajuda"
+          ],
+          "name": "my-money-bot",
+          "description": "Sample Full Description"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:646513389531:function:ask-my-money-bot-user-alexa-default-1668992369935"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
