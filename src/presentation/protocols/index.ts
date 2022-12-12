@@ -1,2 +1,4 @@
-export * from './http.protocols';
-export * from './controller.protocols';
+export * from './http';
+export * from './alexa';
+export * from './http-controller';
+export * from './alexa-voice-controller';

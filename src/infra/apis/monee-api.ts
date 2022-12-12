@@ -1,5 +1,5 @@
 import { NodeFetch } from '../libs/node-fetch';
-import { MoneeApiResponse } from './protocols/monee-api.protocols';
+import { MoneeApiResponse } from './protocols/monee-api';
 import { ConvertCurrencyAPI, ConvertCurrencyAPIRequest } from '@/adapters/apis/protocols';
 
 export class MoneeApi implements ConvertCurrencyAPI {

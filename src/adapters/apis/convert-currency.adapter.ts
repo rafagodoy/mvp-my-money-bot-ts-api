@@ -1,6 +1,6 @@
 import { CurrenciesEntity } from '@/domain/currencies';
 import { ConvertCurrency } from '@/domain/currencies';
-import { ConvertCurrencyAPI } from './protocols/convert-currency-api.protocols';
+import { ConvertCurrencyAPI } from './protocols/convert-currency-api';
 
 export class ApiConvertCurrencyAdapter implements ConvertCurrency {
 

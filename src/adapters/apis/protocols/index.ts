@@ -1,2 +1,2 @@
-export * from './api.protocols';
-export * from './convert-currency-api.protocols';
+export * from './api';
+export * from './convert-currency-api';
