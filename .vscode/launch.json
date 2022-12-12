@@ -12,6 +12,17 @@
      "debug"
     ],
     "port": 4000
+   },
+   {
+    "name": "alexa-skill-debug",
+    "type": "node",
+    "request": "launch",
+    "program": "${workspaceRoot}/local-debugger.js",
+    "args": [
+        "--portNumber", "3001",
+        "--skillEntryFile", "${workspaceRoot}/dist/main/handlers/alexa/index.js",
+        "--lambdaHandler", "handlers"
+    ],
    }
   ]
  }
