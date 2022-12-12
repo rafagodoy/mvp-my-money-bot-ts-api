@@ -8,7 +8,7 @@ provider:
 
 functions:
   currencyQuotes:
-    handler: dist/main/handlers.currencyQuotes
+    handler: dist/main/handlers/api/index.currencyQuotes
     events:
       - httpApi: 'POST /quotes/currencies/{currencyId}'
 
