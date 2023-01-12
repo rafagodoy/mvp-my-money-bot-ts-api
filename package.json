@@ -12,7 +12,8 @@
     "start:dev": "nodemon",
     "debug": "export SLS_DEBUG=* && yarn clear && tsc && tsc-alias && sls offline start",
     "start:ngrok": "ngrok http 3001",
-    "deploy:alexa-skill": "ask deploy --profile user-alexa"
+    "deploy:alexa-skill": "ask deploy --profile user-alexa",
+    "serverless:deploy": "serverless deploy --aws-profile user-alexa"
   },
   "repository": {
     "type": "git",
