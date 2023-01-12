@@ -1,4 +1,4 @@
-service: remessa-voice-api
+service: my-money-bot
 
 frameworkVersion: '2.72.3'
 
@@ -11,6 +11,10 @@ functions:
     handler: dist/main/handlers/api/index.currencyQuotes
     events:
       - httpApi: 'POST /quotes/currencies/{currencyId}'
+  myMoneyBotSkill:
+    handler: dist/main/handlers/alexa/index.handlers
+    events:
+      - alexaSkill: amzn1.ask.skill.ab077192-4e04-40db-a522-ba73adbe06c9
 
 plugins:
   - serverless-offline
