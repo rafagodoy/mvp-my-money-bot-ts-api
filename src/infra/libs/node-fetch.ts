@@ -1,22 +1,108 @@
-import { API, APIRequest, APIResponse } from '@/adapters/apis/protocols';
+import { API, APIRequest, APIResponse } from '@/infra/apis/protocols/api';
 import fetch from 'node-fetch';
 
 export class NodeFetch implements API {
 
-  private setHeaders(token: string) {
-    return {
-      'Authorization': `Bearer ${token}`,
-    };
+  private url: string;
+
+  private bodyParams: any;
+
+  private headersParams: any;
+
+  private pathParams: string;
+
+  private queryParams: string;
+
+  private apiParams: APIRequest;
+
+  private setUrl(url: string) {
+    this.url = url;
   }
 
-  async post(settings: APIRequest): Promise<APIResponse> {
+  private setHeaders(headers?: any, authToken?: string) {
+    if (!headers && authToken) {
+      this.headersParams = {
+        'Authorization': `Bearer ${authToken}`,
+      };
+    }
+    this.headersParams = headers;    
+  }
+
+  private setQueryParams(queryParams: Array<any>) {
+    if (queryParams) {
+      this.queryParams = queryParams.map(obj => {
+        const key = Object.keys(obj)[0];
+        return `${key}=${obj[key]}`;
+      }).join('&');
+    }
+  }
+
+  private setPathParams(pathParams: string) {
+    if (pathParams) {
+      this.pathParams = pathParams;
+    }
+  }
+
+  private setBodyParams(bodyParams: any) {
+    if (bodyParams) {
+      this.bodyParams = JSON.stringify(bodyParams);
+    }
+  }
+
+  private setAPIParams(request: APIRequest) {
+    
+    this.setUrl(request.url);
+    this.setHeaders(request.headers, request.authToken);
+    this.setPathParams(request.pathParams);
+    this.setQueryParams(request.queryParams);
+    this.setBodyParams(request.body);
+    
+    this.apiParams = {
+      ...this.apiParams,
+      url: this.url,
+    };
+
+    if (this.headersParams) {
+      this.apiParams = {
+        ...this.apiParams,
+        headers: this.headersParams,
+      };
+    }
+    if (this.bodyParams) {
+      this.apiParams = {
+        ...this.apiParams,
+        body: this.bodyParams,
+      };
+    }
+    if (this.pathParams) {
+      this.apiParams = {
+        ...this.apiParams,
+        url: `${this.url}${this.setPathParams(request.pathParams)}`,
+      };
+    }
+    if (this.queryParams) {
+      this.apiParams = {
+        ...this.apiParams,
+        url: `${this.url}${this.pathParams}?${this.queryParams}`,
+      };
+    }
+  }
+
+  private getAPIParams() {
+    return this.apiParams;
+  }
+
+  async post(request: APIRequest): Promise<APIResponse> {
     try {
+
+      this.setAPIParams(request);
+      const apiParams = this.getAPIParams();
+      
       const response = await fetch(
-        settings.urlParams,
+        apiParams.url,
         {
+          ...apiParams,
           method: 'POST',
-          body: JSON.stringify(settings.body),
-          headers: this.setHeaders(settings.token),
         },
       );
 
@@ -30,13 +116,17 @@ export class NodeFetch implements API {
     }
   }
 
-  async get(settings: APIRequest): Promise<APIResponse> {
+  async get(request: APIRequest): Promise<APIResponse> {
     try {
+
+      this.setAPIParams(request);
+      const apiParams = this.getAPIParams();
+      
       const response = await fetch(
-        settings.urlParams,
+        apiParams.url,
         {
+          ...apiParams,
           method: 'GET',
-          headers: this.setHeaders(settings.token),
         },
       );
 
