@@ -21,7 +21,12 @@ interface MetaData {
   '5. Time Zone': string;
 }
 
-export type GetStockPriceResponse = {
+export type GetStockPriceAPIRequest = {
+  pathParams: string,
+  queryParams: Array<unknown>
+};
+
+export type GetStockPriceAPIResponse = {
   'Meta Data': MetaData;
   'Time Series (Daily)': TimeSeries;
 };
