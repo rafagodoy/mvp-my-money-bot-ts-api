@@ -1,21 +1,22 @@
-import { 
-  API,
-  APIResponse,
+import { alphaVantage } from '@/config/apis';
+import { API } from '@/infra/apis/protocols';
+import {
   AlphaVantageAPI,
   GetStockPriceAPIRequest,
-} from '@/infra/apis/protocols';
+  GetStockPriceAPIResponse,
+} from '@/adapters/apis/protocols';
 
 export class AlphaVantage implements AlphaVantageAPI {
-  private readonly urlAPI = 'https://www.alphavantage.co';
+  private readonly urlAPI = alphaVantage.url;
 
-  private readonly apiSecret: 'ACTIGGX76W5XGU8L';
+  private readonly apiSecret = alphaVantage.apiSecret;
 
   constructor(
     private readonly nodeFetch: API,
   ) {}
 
-  async getStockPrice(settings: GetStockPriceAPIRequest): Promise<APIResponse> {
-    return this.nodeFetch.get({
+  async getStockPrice(settings: GetStockPriceAPIRequest): Promise<GetStockPriceAPIResponse> {
+    const response = await this.nodeFetch.get({
       url: this.urlAPI,
       pathParams: settings.pathParams,
       queryParams: [
@@ -25,5 +26,7 @@ export class AlphaVantage implements AlphaVantageAPI {
         },
       ],
     });
+
+    return response.body as GetStockPriceAPIResponse;
   }
 }
