@@ -1,2 +1,2 @@
-export * from './api';
-export * from './convert-currency-api';
+export * from '../../../infra/apis/protocols/alpha-vantage-api';
+export * from './get-stock-price';
