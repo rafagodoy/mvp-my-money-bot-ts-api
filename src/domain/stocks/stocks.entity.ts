@@ -7,5 +7,5 @@ export namespace StocksEntity {
   export type tradeDate = string;
   export type lastUpdate = string;
   export type price = lowPrice | highPrice | actualPrice;
-  export type stockStatus = 'low' | 'high' | 'now';
+  export type stockStatus = 'low' | 'high' | 'now' | 'close';
 }
