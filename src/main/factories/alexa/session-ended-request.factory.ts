@@ -1,6 +1,6 @@
 import { TranslatorAdapter } from '@/adapters/voice-skills/translator.adapter';
 import { AlexaSkills } from '@/infra/libs/alexa-skills';
-import { Speaker } from '@/infra/interactions/speaker';
+import { Speaker } from '@/adapters/interactions/speaker';
 import {
   SessionEndedRequestController,
 } from '@/presentation/controllers/alexa/SessionEndedRequestController';
