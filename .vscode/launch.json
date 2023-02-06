@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
    {
-    "name": "remessa-voice-debug",
+    "name": "my-money-bot-api-debug",
     "type": "node",
     "request": "launch",
     "cwd": "${workspaceRoot}",
