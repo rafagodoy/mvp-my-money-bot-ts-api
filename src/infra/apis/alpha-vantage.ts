@@ -21,7 +21,7 @@ export class AlphaVantage implements AlphaVantageAPI {
       pathParams: settings.pathParams,
       queryParams: [
         ...settings.queryParams,
-        { 
+        {
           apikey: this.apiSecret,
         },
       ],

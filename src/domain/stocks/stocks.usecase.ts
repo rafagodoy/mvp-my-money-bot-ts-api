@@ -1,7 +1,7 @@
 import { StocksEntity } from './stocks.entity';
 
 export interface StocksUseCase {
-  getAllPriceData(
+  getStockPrice(
     codeName: StocksEntity.codeName,
     priceStatus: StocksEntity.stockStatus,
     dateSerie: string,

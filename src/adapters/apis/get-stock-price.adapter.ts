@@ -2,7 +2,7 @@ import { StocksUseCase, StocksEntity } from '@/domain/stocks';
 import { GetStockPriceAPIResponse } from '@/adapters/apis/protocols/get-stock-price';
 import { AlphaVantageAPI, GetStockPriceAPIRequest } from '@/adapters/apis/protocols';
 
-export class GetStockPrice implements StocksUseCase {
+export class GetStockPriceAdapter implements StocksUseCase {
 
   constructor(
     private readonly api: AlphaVantageAPI,
@@ -13,20 +13,16 @@ export class GetStockPrice implements StocksUseCase {
   private settings: GetStockPriceAPIRequest;
 
   private setStockPrice = {
-    low: (stockData: GetStockPriceAPIResponse, dateSerie: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][dateSerie]['3. low']);
+    low: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['3. low']);
     },
-    high: (stockData: GetStockPriceAPIResponse, dateSerie: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][dateSerie]['2. high']);
+    high: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['2. high']);
     },
-    close: (stockData: GetStockPriceAPIResponse, dateSerie: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][dateSerie]['4. close']);
+    close: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['4. close']);
     },
   };
-
-  getStockPrice() {
-    return this.stockPrice;
-  }
 
   private setAPIRequest(codeName: StocksEntity.codeName) {
     this.settings = {
@@ -46,17 +42,27 @@ export class GetStockPrice implements StocksUseCase {
     return this.settings;
   }  
 
-  async getAllPriceData(
+  private async setStockData(
     codeName: StocksEntity.codeName,
     stockStatus: StocksEntity.stockStatus,
-    dateSerie: string,
-  ): Promise<StocksEntity.price> {
+    tradeDate: StocksEntity.tradeDate,
+  ) {
     
     this.setAPIRequest(codeName);
     const settings = this.getAPIRequest();
 
     const responseAPI = await this.api.getStockPrice(settings);
 
-    return this.setStockPrice[stockStatus](responseAPI, dateSerie);
+    this.setStockPrice[stockStatus](responseAPI, tradeDate);
+  }
+
+  async getStockPrice(
+    codeName: StocksEntity.codeName,
+    stockStatus: StocksEntity.stockStatus,
+    tradeDate: StocksEntity.tradeDate,
+  ): Promise<StocksEntity.price> {
+
+    await this.setStockData(codeName, stockStatus, tradeDate);
+    return this.stockPrice;
   }
 }
