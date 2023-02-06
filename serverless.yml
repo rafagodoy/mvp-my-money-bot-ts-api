@@ -7,10 +7,10 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  currencyQuotes:
-    handler: dist/main/handlers/api/index.currencyQuotes
+  getStockPrice:
+    handler: dist/main/handlers/api/index.getStockPrice
     events:
-      - httpApi: 'POST /quotes/currencies/{currencyId}'
+      - httpApi: 'GET /stocks/{codeName}'
   myMoneyBotSkill:
     handler: dist/main/handlers/alexa/index.handlers
     events:

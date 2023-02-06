@@ -1,9 +1,9 @@
 import { AWSLambdaAdapter } from '../../aws-lambda.adapter';
-import { makeConvertCurrencyController } from '../../factories/api/convert-currency.factory';
+import { makeGetStockPriceController } from '../../factories/api/get-stock-price.factory';
 
-module.exports.currencyQuotes = async (event) => {
+module.exports.getStockPrice = async (event) => {
 
-  const controller = makeConvertCurrencyController();
+  const controller = makeGetStockPriceController();
   const awsLambda = new AWSLambdaAdapter(controller);
 
   return awsLambda.start(event);
