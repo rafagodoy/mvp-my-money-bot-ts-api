@@ -14,13 +14,13 @@ export class GetStockPriceAdapter implements StocksUseCase {
 
   private setStockPrice = {
     low: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['3. low']);
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['3. low']);
     },
     high: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['2. high']);
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['2. high']);
     },
     close: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)'][tradeDate]['4. close']);
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['4. close']);
     },
   };
 

@@ -8,6 +8,23 @@ export class GetStockPriceController implements HttpController {
     private readonly stocks: StocksUseCase,
   ) {}
 
+  async getResponse(stockPrice: number) {
+    return stockPrice && !Number.isNaN(stockPrice) ?
+      {
+        statusCode: 200,
+        body: {
+          stockPrice,
+        },
+      }
+      :
+      {
+        statusCode: 404,
+        body: {
+          msg: 'stock price not found',
+        },
+      };
+  }
+
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       
@@ -22,12 +39,8 @@ export class GetStockPriceController implements HttpController {
         tradeDate,
       );
 
-      return {
-        statusCode: 200,
-        body: {
-          stockPrice,
-        },
-      };
+      return await this.getResponse(stockPrice);
+
     } catch (err) {
       console.log(err);
       return {
