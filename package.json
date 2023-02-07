@@ -29,6 +29,7 @@
     "ask-sdk-core": "^2.12.1",
     "ask-sdk-model": "^1.39.0",
     "aws-sdk": "^2.1255.0",
+    "dotenv": "^16.0.3",
     "node-fetch": "^2.6.6",
     "serverless-offline": "^8.8.0",
     "typescript": "^3.5.3"
