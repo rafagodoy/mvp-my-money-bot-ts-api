@@ -1,2 +1,2 @@
 export * from './stocks.entity';
-export * from './stocks.usecase';
+export * from './get-stock-price.usecase';

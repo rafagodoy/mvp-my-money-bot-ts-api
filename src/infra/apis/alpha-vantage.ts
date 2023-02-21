@@ -18,9 +18,12 @@ export class AlphaVantage implements AlphaVantageAPI {
   async getStockPrice(settings: GetStockPriceAPIRequest): Promise<GetStockPriceAPIResponse> {
     const response = await this.nodeFetch.get({
       url: this.urlAPI,
-      pathParams: settings.pathParams,
+      pathParams: '/query',
       queryParams: [
         ...settings.queryParams,
+        {
+          function: 'TIME_SERIES_DAILY_ADJUSTED',
+        },
         {
           apikey: this.apiSecret,
         },

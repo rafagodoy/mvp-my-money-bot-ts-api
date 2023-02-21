@@ -1,8 +1,8 @@
-import { StocksUseCase, StocksEntity } from '@/domain/stocks';
+import { GetStocksPriceUseCase, StocksEntity } from '@/domain/stocks';
 import { GetStockPriceAPIResponse } from '@/adapters/apis/protocols/get-stock-price';
 import { AlphaVantageAPI, GetStockPriceAPIRequest } from '@/adapters/apis/protocols';
 
-export class GetStockPriceAdapter implements StocksUseCase {
+export class GetStockPriceAdapter implements GetStocksPriceUseCase {
 
   constructor(
     private readonly api: AlphaVantageAPI,
@@ -26,11 +26,7 @@ export class GetStockPriceAdapter implements StocksUseCase {
 
   private setAPIRequest(codeName: StocksEntity.codeName) {
     this.settings = {
-      pathParams: '/query',
       queryParams: [
-        {
-          function: 'TIME_SERIES_DAILY_ADJUSTED',
-        },
         {
           symbol: codeName,
         },

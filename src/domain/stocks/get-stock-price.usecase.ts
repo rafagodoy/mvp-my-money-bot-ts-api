@@ -1,6 +1,6 @@
 import { StocksEntity } from './stocks.entity';
 
-export interface StocksUseCase {
+export interface GetStocksPriceUseCase {
   getStockPrice(
     codeName: StocksEntity.codeName,
     priceStatus: StocksEntity.stockStatus,

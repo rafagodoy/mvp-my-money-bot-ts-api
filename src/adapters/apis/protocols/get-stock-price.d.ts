@@ -22,7 +22,7 @@ interface MetaData {
 }
 
 export type GetStockPriceAPIRequest = {
-  pathParams: string,
+  pathParams?: string,
   queryParams: Array<unknown>
 };
 

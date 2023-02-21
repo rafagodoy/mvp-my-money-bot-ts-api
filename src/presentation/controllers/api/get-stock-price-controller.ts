@@ -1,11 +1,11 @@
 import { HttpRequest, HttpResponse, HttpController } from '@/presentation/protocols';
 import { GetStockPriceSchema } from '@/presentation/validation/get-stock-price';
-import { StocksUseCase } from '@/domain/stocks';
+import { GetStocksPriceUseCase } from '@/domain/stocks';
 
 export class GetStockPriceController implements HttpController {
 
   constructor(
-    private readonly stocks: StocksUseCase,
+    private readonly stocks: GetStocksPriceUseCase,
   ) {}
 
   async getResponse(stockPrice: number) {
