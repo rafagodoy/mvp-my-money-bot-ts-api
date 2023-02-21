@@ -38,7 +38,7 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
     return this.settings;
   }  
 
-  private async setStockData(
+  private async run(
     codeName: StocksEntity.codeName,
     stockStatus: StocksEntity.stockStatus,
     tradeDate: StocksEntity.tradeDate,
@@ -58,7 +58,7 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
     tradeDate: StocksEntity.tradeDate,
   ): Promise<StocksEntity.price> {
 
-    await this.setStockData(codeName, stockStatus, tradeDate);
+    await this.run(codeName, stockStatus, tradeDate);
     return this.stockPrice;
   }
 }
