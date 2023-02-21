@@ -3,6 +3,8 @@ import { API } from '@/infra/apis/protocols';
 import {
   AlphaVantageAPI,
   GetStockPriceAPIRequest,
+  GetStockNameAPIRequest,
+  GetStockNameAPIResponse,
   GetStockPriceAPIResponse,
 } from '@/adapters/apis/protocols';
 
@@ -31,5 +33,23 @@ export class AlphaVantage implements AlphaVantageAPI {
     });
 
     return response.body as GetStockPriceAPIResponse;
+  }
+
+  async getStockName(settings: GetStockNameAPIRequest): Promise<GetStockNameAPIResponse> {
+    const response = await this.nodeFetch.get({
+      url: this.urlAPI,
+      pathParams: '/query',
+      queryParams: [
+        ...settings.queryParams,
+        {
+          function: 'SYMBOL_SEARCH',
+        },
+        {
+          apikey: this.apiSecret,
+        },
+      ],
+    });
+
+    return response.body as GetStockNameAPIResponse;
   }
 }
