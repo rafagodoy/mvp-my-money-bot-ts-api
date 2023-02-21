@@ -11,6 +11,10 @@ functions:
     handler: dist/main/handlers/api/index.getStockPrice
     events:
       - httpApi: 'GET /stocks/{codeName}'
+  getStockName:
+    handler: dist/main/handlers/api/index.getStockName
+    events:
+      - httpApi: 'GET /stocks'
   myMoneyBotSkill:
     handler: dist/main/handlers/alexa/index.handlers
     events:
