@@ -8,7 +8,7 @@ import {
 
 export class AlexaSkills implements AlexaSkillSDK {
 
-  makeRequestBy = {
+  private makeRequestBy = {
     LaunchRequest: (input: AlexaRequest): boolean => {
       return getRequestType(input.requestEnvelope) === 'LaunchRequest';
     },
@@ -21,25 +21,20 @@ export class AlexaSkills implements AlexaSkillSDK {
     },
   };
 
-  async getIntentName(input: AlexaRequest): Promise<string> {
-    const requestType = input.requestEnvelope.request.type;
-    if (requestType === 'LaunchRequest' || requestType === 'IntentRequest') {
-      return 'WelcomeIntent';
-    }
-    return null;
-  }
-
   async request(
     input: AlexaRequest,
     intentName: string,
     requestType: RequestType,
   ): Promise<boolean> {
+    
     return this.makeRequestBy[requestType](input, intentName);
   }
 
-  async response(input: AlexaRequest, speechText: string): AlexaResponse {
-    return input.responseBuilder
+  async response(input: AlexaRequest, speechText?: string): AlexaResponse {
+    return speechText ? input.responseBuilder
       .speak(escapeXmlCharacters(speechText))
-      .getResponse();
+      .getResponse() :
+      input.responseBuilder
+        .getResponse();
   }
 }
