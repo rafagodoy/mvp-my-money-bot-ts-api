@@ -1,3 +1,4 @@
+import { BaseController } from './BaseController';
 import { AlexaSkillSDK } from '@/adapters/voice-skills/protocols';
 import { Translator } from '@/domain/interactions';
 import { 
@@ -7,24 +8,23 @@ import {
   AlexaVoiceController,
 } from '@/presentation/protocols';
 
-export class LaunchRequestController implements AlexaVoiceController {
+export class LaunchRequestController extends BaseController implements AlexaVoiceController {
 
   constructor(
     private readonly sdk: AlexaSkillSDK,
     private readonly translator: Translator,
+    private readonly intentName = 'WelcomeIntent',
     private readonly requestType: RequestType = 'LaunchRequest',
-  ) {}
+  ) {
+    super();
+  }
 
   async canHandle(input: AlexaRequest): Promise<boolean> {
-    const intentName = await this.sdk.getIntentName(input);
-
-    return this.sdk.request(input, intentName, this.requestType);
+    return this.sdk.request(input, this.intentName, this.requestType);
   }
 
   async handle(input: AlexaRequest): AlexaResponse {
-    const intentName = await this.sdk.getIntentName(input);
-    const speechOutput = this.translator.byIntentName(intentName);
-
+    const speechOutput = this.translator.byIntentName(this.intentName);
     return this.sdk.response(input, speechOutput);
   }
 }
