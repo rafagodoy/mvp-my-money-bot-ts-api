@@ -1,3 +1,4 @@
 {
-  "WelcomeIntent": "Eai meu caro! qual cotação deseja saber agora?"
+  "WelcomeIntent": "Eai meu caro qual cotacao deseja saber agora?",
+  "GetStockPriceIntent": "O preco da acao {companyName} e de {price} reais"
 }
