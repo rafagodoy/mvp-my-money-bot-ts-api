@@ -1,6 +1,7 @@
 import { BaseController } from './BaseController';
-import { AlexaSkillSDK } from '@/adapters/voice-skills/protocols';
+import { AlexaSkillSDK, GetStockPriceMessageParams } from '@/adapters/voice-skills/protocols';
 import { Translator } from '@/domain/interactions';
+import { GetStockNameUseCase, GetStocksPriceUseCase } from '@/domain/stocks'; 
 import { 
   AlexaRequest,
   AlexaResponse,
@@ -13,6 +14,8 @@ export class GetStockPriceIntentController extends BaseController implements Ale
   constructor(
     private readonly sdk: AlexaSkillSDK,
     private readonly translator: Translator,
+    private readonly stockPrice: GetStocksPriceUseCase,
+    private readonly stockName: GetStockNameUseCase,
     private readonly requestType: RequestType = 'IntentRequest',
     private readonly intentToMatch = 'GetStockPriceIntent',
   ) {
@@ -27,7 +30,20 @@ export class GetStockPriceIntentController extends BaseController implements Ale
     const intentCatched = await super.getIntentName(input);
 
     if (intentCatched === this.intentToMatch) {
-      const speechOutput = this.translator.byIntentName(intentCatched);
+
+      const { companyName, tradeDate } = await super.getSlotsFromIntent(input);
+
+      const stockName = await this.stockName.getStockName(companyName.value);
+      const price = await this.stockPrice.getStockPrice(stockName, 'now', tradeDate.value);
+
+      const messageParams = {
+        companyName: companyName.value,
+        price,
+      };
+
+      const speechOutput = this.translator
+        .byIntentName<GetStockPriceMessageParams>(intentCatched, messageParams);
+
       return this.sdk.response(input, speechOutput);
     }
   }
