@@ -1,6 +1,8 @@
 import {
   AlexaRequest,
   AlexaIntent,
+  AlexaSlot,
+  Slots,
 } from '@/adapters/voice-skills/protocols';
 
 export class BaseController {
@@ -27,5 +29,18 @@ export class BaseController {
       return intent.name;
     }
     return null;
+  }
+
+  async getSlotsFromIntent(input: AlexaRequest): Promise<Slots> {
+
+    this.setIntentObject(input);
+    const intent = this.getIntentObject();
+
+    const slots: AlexaSlot = intent.slots;
+
+    return Object.values(slots)
+      .filter((slot) => slot.value !== undefined)
+      .map(({ name, value }) => ({ [name as string]: { value } }))
+      .reduce((acc, curr) => Object.assign(acc, curr), {});
   }
 }
