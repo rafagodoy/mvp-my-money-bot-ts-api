@@ -7,11 +7,12 @@
     "request": "launch",
     "cwd": "${workspaceRoot}",
     "runtimeExecutable": "npm",
+    "localRoot": "${workspaceRoot}/src/main/handlers/api",
     "runtimeArgs": [
      "run-script",
      "debug"
     ],
-    "port": 4000
+    "port": 3000
    },
    {
     "name": "alexa-skill-debug",
@@ -26,9 +27,9 @@
     "envFile": "${workspaceRoot}/.env",
     "program": "${workspaceRoot}/local-debugger.js",
     "args": [
-        "--portNumber", "3001",
-        "--skillEntryFile", "${workspaceRoot}/src/main/handlers/alexa/index.ts",
-        "--lambdaHandler", "handlers"
+      "--portNumber", "3001",
+      "--skillEntryFile", "${workspaceRoot}/src/main/handlers/alexa/index.ts",
+      "--lambdaHandler", "handlers"
     ],
     "cwd": "${workspaceRoot}",
     "console": "integratedTerminal",
