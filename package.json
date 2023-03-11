@@ -13,7 +13,8 @@
     "debug": "export SLS_DEBUG=* && yarn clear && tsc && tsc-alias && sls offline start",
     "start:ngrok": "ngrok http 3001",
     "deploy:alexa-skill": "ask deploy --profile user-alexa",
-    "serverless:deploy": "serverless deploy --aws-profile user-alexa"
+    "serverless:deploy": "serverless deploy --aws-profile user-alexa",
+    "postinstall": "tsc-alias setup"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,11 @@
     "aws-sdk": "^2.1255.0",
     "dotenv": "^16.0.3",
     "node-fetch": "^2.6.6",
-    "serverless-offline": "^8.8.0",
-    "typescript": "^3.5.3"
+    "serverless-offline": "^8.8.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/babel__traverse": "^7.0.10",
     "@types/jest": "^24.0.15",
     "@types/node-fetch": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
@@ -48,6 +49,8 @@
     "serverless-plugin-typescript": "^1.1.7",
     "serverless-stack-output": "^0.2.3",
     "ts-jest": "^24.0.2",
-    "tsc-alias": "^1.6.11"
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.3",
+    "typescript": "^4.9.5"
   }
 }
