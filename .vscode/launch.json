@@ -17,12 +17,23 @@
     "name": "alexa-skill-debug",
     "type": "node",
     "request": "launch",
+    "runtimeArgs": [
+      "-r",
+      "ts-node/register",
+      "-r",
+      "tsconfig-paths/register"
+    ],
+    "envFile": "${workspaceRoot}/.env",
     "program": "${workspaceRoot}/local-debugger.js",
     "args": [
         "--portNumber", "3001",
-        "--skillEntryFile", "${workspaceRoot}/dist/main/handlers/alexa/index.js",
+        "--skillEntryFile", "${workspaceRoot}/src/main/handlers/alexa/index.ts",
         "--lambdaHandler", "handlers"
     ],
+    "cwd": "${workspaceRoot}",
+    "console": "integratedTerminal",
+    "internalConsoleOptions": "neverOpen",
+    "restart": true
    }
   ]
  }
