@@ -1,7 +1,7 @@
 import { BaseController } from './BaseController';
 import { AlexaSkillSDK, GetStockPriceMessageParams } from '@/adapters/voice-skills/protocols';
 import { Translator } from '@/domain/interactions';
-import { GetStockNameUseCase, GetStocksPriceUseCase } from '@/domain/stocks'; 
+import { StockServiceProtocol } from '@/presentation/services/protocols';
 import { 
   AlexaRequest,
   AlexaResponse,
@@ -14,8 +14,7 @@ export class GetStockPriceIntentController extends BaseController implements Ale
   constructor(
     private readonly sdk: AlexaSkillSDK,
     private readonly translator: Translator,
-    private readonly stockPrice: GetStocksPriceUseCase,
-    private readonly stockName: GetStockNameUseCase,
+    private readonly stockService: StockServiceProtocol,
     private readonly requestType: RequestType = 'IntentRequest',
     private readonly intentToMatch = 'GetStockPriceIntent',
   ) {
@@ -33,8 +32,7 @@ export class GetStockPriceIntentController extends BaseController implements Ale
 
       const { companyName, tradeDate } = await super.getSlotsFromIntent(input);
 
-      const stockName = await this.stockName.getStockName(companyName.value);
-      const price = await this.stockPrice.getStockPrice(stockName, 'now', tradeDate.value);
+      const { price } = await this.stockService.getStockDetails(companyName.value, tradeDate.value);
 
       const messageParams = {
         companyName: companyName.value,
