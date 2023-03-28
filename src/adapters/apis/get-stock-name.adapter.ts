@@ -43,7 +43,7 @@ export class GetStockNameAdapter implements GetStockNameUseCase {
 
   async getStockName(
     companyName: StocksEntity.companyName,
-  ): Promise<StocksEntity.companyName> {
+  ): Promise<StocksEntity.codeName> {
 
     await this.run(companyName);
     return this.stockName;
