@@ -4,6 +4,6 @@ export interface GetStocksPriceUseCase {
   getStockPrice(
     codeName: StocksEntity.codeName,
     priceStatus: StocksEntity.stockStatus,
-    dateSerie: string,
+    dateSerie: Date,
   ): Promise<StocksEntity.price>
 }

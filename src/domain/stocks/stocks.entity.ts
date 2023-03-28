@@ -4,8 +4,8 @@ export namespace StocksEntity {
   export type actualPrice = number;
   export type lowPrice = number;
   export type highPrice = number;
-  export type tradeDate = string;
+  export type tradeDate = Date;
   export type lastUpdate = string;
   export type price = lowPrice | highPrice | actualPrice;
-  export type stockStatus = 'low' | 'high' | 'now' | 'close';
+  export type stockStatus = 'low' | 'high' | 'close';
 }

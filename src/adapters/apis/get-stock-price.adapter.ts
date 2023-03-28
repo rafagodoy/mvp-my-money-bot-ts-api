@@ -13,14 +13,14 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
   private settings: GetStockPriceAPIRequest;
 
   private setStockPrice = {
-    low: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['3. low']);
+    low: (stockData: GetStockPriceAPIResponse, tradeDateString: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDateString]?.['3. low']);
     },
-    high: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['2. high']);
+    high: (stockData: GetStockPriceAPIResponse, tradeDateString: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDateString]?.['2. high']);
     },
-    close: (stockData: GetStockPriceAPIResponse, tradeDate: string) => {
-      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDate]?.['4. close']);
+    close: (stockData: GetStockPriceAPIResponse, tradeDateString: string) => {
+      this.stockPrice = Number(stockData['Time Series (Daily)']?.[tradeDateString]?.['4. close']);
     },
   };
 
@@ -49,7 +49,9 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
 
     const responseAPI = await this.api.getStockPrice(settings);
 
-    this.setStockPrice[stockStatus](responseAPI, tradeDate);
+    const tradeDateString: string = tradeDate.toISOString();
+
+    this.setStockPrice[stockStatus](responseAPI, tradeDateString);
   }
 
   async getStockPrice(
@@ -57,7 +59,6 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
     stockStatus: StocksEntity.stockStatus,
     tradeDate: StocksEntity.tradeDate,
   ): Promise<StocksEntity.price> {
-
     await this.run(codeName, stockStatus, tradeDate);
     return this.stockPrice;
   }
