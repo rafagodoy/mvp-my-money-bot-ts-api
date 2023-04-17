@@ -1,16 +1,17 @@
-import { AlphaVantage } from '@/infra/apis';
-import { NodeFetch } from '@/infra/libs';
+import { AlphaVantageAPI } from '@/adapters/apis/protocols';
 import { GetStockNameAdapter, GetStockPriceAdapter } from '@/adapters/apis';
 import { DateAdapter } from '@/adapters/utils';
 import { TradeDate } from '@/domain/stocks/value-objects';
 
 export class StocksFactory {
 
-  private readonly api = new AlphaVantage(
-    new NodeFetch(),
-  );
-
   private readonly date = new DateAdapter();
+
+  constructor(
+    private readonly api: AlphaVantageAPI,
+  ) {
+
+  }
 
   createUseCases() {
     return {
