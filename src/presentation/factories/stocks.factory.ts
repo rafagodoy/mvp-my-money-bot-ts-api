@@ -7,11 +7,7 @@ export class StocksFactory {
 
   private readonly date = new DateAdapter();
 
-  constructor(
-    private readonly api: AlphaVantageAPI,
-  ) {
-
-  }
+  constructor(private readonly api: AlphaVantageAPI) {}
 
   createUseCases() {
     return {
