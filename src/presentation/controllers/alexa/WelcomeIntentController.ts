@@ -24,10 +24,10 @@ export class WelcomeIntentController extends BaseController implements AlexaVoic
   }
 
   async handle(input: AlexaRequest): AlexaResponse {
-    const intentCatched = await super.getIntentName(input);
+    const intentTriggered = await super.getIntentName(input);
     
-    if (intentCatched === this.intentToMatch) {
-      const speechOutput = this.translator.byIntentName(intentCatched);
+    if (intentTriggered === this.intentToMatch) {
+      const speechOutput = this.translator.byIntentName(intentTriggered);
       return this.sdk.response(input, speechOutput);
     }
 
