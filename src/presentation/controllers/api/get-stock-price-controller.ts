@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, HttpController } from '@/presentation/protocols';
-import { GetStockPriceSchema } from '@/presentation/validation/get-stock-price';
+import { GetStockPriceSchemaForAPI } from '@/presentation/validation/get-stock-price';
 import { GetStocksPriceUseCase } from '@/domain/stocks';
 
 export class GetStockPriceController implements HttpController {
@@ -30,8 +30,8 @@ export class GetStockPriceController implements HttpController {
       
       const { pathParams, queryStringParams } = httpRequest;
 
-      const { codeName } = pathParams as GetStockPriceSchema;
-      const { stockStatus, tradeDate } = queryStringParams as GetStockPriceSchema;
+      const { codeName } = pathParams as GetStockPriceSchemaForAPI;
+      const { stockStatus, tradeDate } = queryStringParams as GetStockPriceSchemaForAPI;
       
       const stockPrice = await this.stocks.getStockPrice(
         codeName,
