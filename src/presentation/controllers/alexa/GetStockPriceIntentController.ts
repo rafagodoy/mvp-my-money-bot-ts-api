@@ -45,11 +45,11 @@ export class GetStockPriceIntentController extends BaseController implements Ale
 
     if (intentTriggered === this.intentToMatch) {
 
-      const { companyName } = await super.getSlotsFromIntent(input);
+      const { companyName, tradeDate } = await super.getSlotsFromIntent(input);
 
       const inputCatched = {
         companyName: companyName.value,
-        tradeDate: '2023-05-08',
+        tradeDate: tradeDate.value,
       };
 
       const isValid = this.isValidRequest(inputCatched);
