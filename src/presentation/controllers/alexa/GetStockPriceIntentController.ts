@@ -2,7 +2,7 @@ import { BaseController } from './BaseController';
 import { AlexaSkillSDK, GetStockPriceMessageParams } from '@/adapters/voice-skills/protocols';
 import { Translator } from '@/domain/interactions';
 import { StockServiceProtocol } from '@/presentation/services/protocols';
-import { GetStockPriceValidator } from '@/presentation/validation/get-stock-price';
+import { GetStockPriceValidator } from '@/presentation/validation/protocols';
 import {
   AlexaRequest,
   AlexaResponse,
@@ -45,11 +45,11 @@ export class GetStockPriceIntentController extends BaseController implements Ale
 
     if (intentTriggered === this.intentToMatch) {
 
-      const { companyName, tradeDate } = await super.getSlotsFromIntent(input);
+      const { companyName } = await super.getSlotsFromIntent(input);
 
       const inputCatched = {
         companyName: companyName.value,
-        tradeDate: tradeDate.value,
+        tradeDate: '2023-05-08',
       };
 
       const isValid = this.isValidRequest(inputCatched);

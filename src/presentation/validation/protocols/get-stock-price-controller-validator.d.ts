@@ -1,4 +1,4 @@
-import { GetStockPriceSchemaForAlexa } from '../get-stock-price.schema';
+import { GetStockPriceSchemaForAlexa } from '../get-stock-price/get-stock-price.schema';
 
 export type GetStockPriceValidatorResponse = {
   isValidTradeDate: boolean,

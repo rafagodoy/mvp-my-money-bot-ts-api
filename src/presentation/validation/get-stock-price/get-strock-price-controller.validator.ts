@@ -4,12 +4,12 @@ import { StocksEntity } from '@/domain/stocks';
 import { 
   GetStockPriceValidator,
   GetStockPriceValidatorResponse,
-} from './protocols/get-stock-price-controller-validator';
+} from '../protocols/get-stock-price-controller-validator';
 
 export class GetStockPriceControllerValidator implements GetStockPriceValidator {
 
   private tradeDateValidator;
-    
+
   constructor(
     private readonly stocks: StocksFactory,
   ) {
