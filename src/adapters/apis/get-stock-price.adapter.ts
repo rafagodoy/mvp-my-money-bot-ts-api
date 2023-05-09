@@ -49,7 +49,7 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
 
     const responseAPI = await this.api.getStockPrice(settings);
 
-    const tradeDateString: string = tradeDate.toISOString();
+    const tradeDateString: string = tradeDate.toString();
 
     this.setStockPrice[stockStatus](responseAPI, tradeDateString);
   }
