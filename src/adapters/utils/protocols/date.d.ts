@@ -1,6 +1,14 @@
+export type regionOptions = 'EnUs' | 'PtBr';
+
+export interface DateParser {
+  EnUs(date: Date): string;
+  PtBr(date: Date): string;
+}
+
 export interface DateUtils {
-  parseToEnUs(date: Date): string,
-  parseToPtBr(date: Date): string,
   isSameYearAsNow(date: Date): boolean,
   isValid(date: Date): boolean,
+  getLastAvailable(region: regionOptions, date?: Date): string,
+  getNow(region: regionOptions): string,
+  setYearToNow(date: Date, region: regionOptions): string
 }

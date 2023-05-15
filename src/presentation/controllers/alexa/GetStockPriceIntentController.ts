@@ -49,7 +49,7 @@ export class GetStockPriceIntentController extends BaseController implements Ale
 
       const inputCatched = {
         companyName: companyName.value,
-        tradeDate: tradeDate.value,
+        tradeDate: tradeDate?.value,
       };
 
       const isValid = this.isValidRequest(inputCatched);

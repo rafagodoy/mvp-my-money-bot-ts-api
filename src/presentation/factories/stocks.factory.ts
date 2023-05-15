@@ -11,7 +11,7 @@ export class StocksFactory {
 
   createUseCases() {
     return {
-      price: new GetStockPriceAdapter(this.api),
+      price: new GetStockPriceAdapter(this.api, this.date),
       codeName: new GetStockNameAdapter(this.api),
     };
   }
