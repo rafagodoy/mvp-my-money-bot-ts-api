@@ -28,17 +28,13 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
     },
   };
 
-  private setLastAvailableTradeDate() {
-    this.tradeDate = this.date.getLastAvailable('EnUs');
-  }
-
   private setTradeDate(tradeDate: StocksEntity.tradeDate) {
     if (tradeDate) {
       this.tradeDate = tradeDate.toString();
     }
 
     if (!tradeDate) {
-      this.setLastAvailableTradeDate();
+      this.tradeDate = this.date.getLastAvailable('EnUs');
     }
 
     if (tradeDate && !this.date.isSameYearAsNow(tradeDate)) {
