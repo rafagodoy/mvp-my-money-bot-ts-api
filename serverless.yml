@@ -5,6 +5,14 @@ frameworkVersion: '2.72.3'
 provider:
   name: aws
   runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ssm:GetParameter*
+      Resource: "arn:aws:ssm:us-east-1:646513389531:parameter/*"
+  environment:
+    ALPHA_VANTAGE_API_URL: ${ssm:/ALPHA_VANTAGE_API_URL}
+    ALPHA_VANTAGE_API_SECRET: ${ssm:/ALPHA_VANTAGE_API_SECRET}
 
 functions:
   getStockPrice:
