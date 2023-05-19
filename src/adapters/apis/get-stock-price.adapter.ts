@@ -30,15 +30,12 @@ export class GetStockPriceAdapter implements GetStocksPriceUseCase {
 
   private setTradeDate(tradeDate: StocksEntity.tradeDate) {
     if (tradeDate) {
-      this.tradeDate = tradeDate.toString();
+      const dateToYearAsNow = this.date.setYearToNow(tradeDate, 'EnUs');
+      this.tradeDate = this.date.getLastAvailable('EnUs', dateToYearAsNow);
     }
 
     if (!tradeDate) {
       this.tradeDate = this.date.getLastAvailable('EnUs');
-    }
-
-    if (tradeDate && !this.date.isSameYearAsNow(tradeDate)) {
-      this.tradeDate = this.date.setYearToNow(tradeDate, 'EnUs');
     }
   }
 
