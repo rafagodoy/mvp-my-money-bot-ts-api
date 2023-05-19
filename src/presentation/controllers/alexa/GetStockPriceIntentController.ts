@@ -1,27 +1,16 @@
-import { BaseController } from './BaseController';
-import { AlexaSkillSDK, GetStockPriceMessageParams } from '@/adapters/voice-skills/protocols';
+import { GetStockPriceMessageParams } from '@/adapters/voice-skills/protocols';
 import { Translator } from '@/domain/interactions';
 import { StockServiceProtocol } from '@/presentation/services/protocols';
 import { GetStockPriceValidator } from '@/presentation/validation/protocols';
-import {
-  AlexaRequest,
-  AlexaResponse,
-  RequestType,
-  AlexaVoiceController,
-} from '@/presentation/protocols';
+import { Slots } from '@/presentation/protocols';
 
-export class GetStockPriceIntentController extends BaseController implements AlexaVoiceController {
+export class GetStockPriceIntentController {
 
   constructor(
-    private readonly sdk: AlexaSkillSDK,
     private readonly translator: Translator,
     private readonly validator: GetStockPriceValidator,
     private readonly stockService: StockServiceProtocol,
-    private readonly requestType: RequestType = 'IntentRequest',
-    private readonly intentToMatch = 'GetStockPriceIntent',
-  ) {
-    super();
-  }
+  ) { }
 
   async isValidRequest(inputCatched): Promise<boolean> {
     const {
@@ -36,45 +25,33 @@ export class GetStockPriceIntentController extends BaseController implements Ale
     return true;
   }
 
-  async canHandle(input: AlexaRequest): Promise<boolean> {
-    return this.sdk.request(input, this.intentToMatch, this.requestType);
-  }
+  async handle(slots: Slots): Promise<string> {
 
-  async handle(input: AlexaRequest): AlexaResponse {
-    const intentTriggered = await super.getIntentName(input);
+    const { companyName, tradeDate } = slots;
 
-    if (intentTriggered === this.intentToMatch) {
+    const inputCatched = {
+      companyName: companyName.value,
+      tradeDate: tradeDate?.value,
+    };
 
-      const { companyName, tradeDate } = await super.getSlotsFromIntent(input);
+    const isValid = this.isValidRequest(inputCatched);
 
-      const inputCatched = {
-        companyName: companyName.value,
-        tradeDate: tradeDate?.value,
-      };
-
-      const isValid = this.isValidRequest(inputCatched);
-
-      if (!isValid) {
-        const speechOutput = this.translator
-          .byIntentName<GetStockPriceMessageParams>('ErrorFoundIntent');
-
-        return this.sdk.response(input, speechOutput);
-      }
-
-      const { price } = await this.stockService.getStockDetails(
-        inputCatched.companyName,
-        inputCatched.tradeDate,
-      );
-
-      const messageParams = {
-        companyName: companyName.value,
-        price,
-      };
-
-      const speechOutput = this.translator
-        .byIntentName<GetStockPriceMessageParams>(intentTriggered, messageParams);
-
-      return this.sdk.response(input, speechOutput);
+    if (!isValid) {
+      return this.translator
+        .byIntentName<GetStockPriceMessageParams>('ErrorFoundIntent');
     }
+
+    const { price } = await this.stockService.getStockDetails(
+      inputCatched.companyName,
+      inputCatched.tradeDate,
+    );
+
+    const messageParams = {
+      companyName: companyName.value,
+      price,
+    };
+
+    return this.translator
+      .byIntentName<GetStockPriceMessageParams>('GetStockPriceIntent', messageParams);
   }
 }

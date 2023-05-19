@@ -1,4 +1,3 @@
-import { BaseController } from './BaseController';
 import { AlexaSkillSDK } from '@/adapters/voice-skills/protocols';
 import { 
   AlexaRequest,
@@ -7,13 +6,12 @@ import {
   AlexaVoiceController,
 } from '@/presentation/protocols';
 
-export class SessionEndedRequestController extends BaseController implements AlexaVoiceController {
+export class SessionEndedRequestController implements AlexaVoiceController {
 
   constructor(
     private readonly sdk: AlexaSkillSDK,
     private readonly requestType: RequestType = 'SessionEndedRequest',
   ) {
-    super();
   }
 
   async canHandle(input: AlexaRequest): Promise<boolean> {
