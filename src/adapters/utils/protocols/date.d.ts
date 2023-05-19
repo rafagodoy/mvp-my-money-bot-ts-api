@@ -8,7 +8,7 @@ export interface DateParser {
 export interface DateUtils {
   isSameYearAsNow(date: Date): boolean,
   isValid(date: Date): boolean,
-  getLastAvailable(region: regionOptions, date?: Date): string,
+  getLastAvailable(region: regionOptions, date?: Date | string): string,
   getNow(region: regionOptions): string,
   setYearToNow(date: Date, region: regionOptions): string
 }
