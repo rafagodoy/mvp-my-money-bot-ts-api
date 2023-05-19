@@ -1,4 +1,3 @@
-import { BaseController } from './BaseController';
 import { AlexaSkillSDK } from '@/adapters/voice-skills/protocols';
 import { 
   AlexaRequest,
@@ -6,12 +5,11 @@ import {
   AlexaVoiceController,
 } from '@/presentation/protocols';
 
-export class ErrorHandlerController extends BaseController implements AlexaVoiceController {
+export class ErrorHandlerController implements AlexaVoiceController {
 
   constructor(
     private readonly sdk: AlexaSkillSDK,
   ) {
-    super();
   }
 
   async canHandle(): Promise<boolean> {

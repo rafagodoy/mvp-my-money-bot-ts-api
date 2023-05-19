@@ -6,6 +6,7 @@ import { AlphaVantage } from '@/infra/apis';
 import { NodeFetch } from '@/infra/libs';
 import { Speaker } from '@/adapters/interactions/speaker';
 import { GetStockPriceControllerValidator } from '@/presentation/validation/get-stock-price';
+import { AlexaHandlerController } from '@/presentation/controllers/alexa/AlexaHandlerController';
 import { 
   GetStockPriceIntentController,
 } from '@/presentation/controllers/alexa/GetStockPriceIntentController';
@@ -21,10 +22,15 @@ const stocksService = new StocksService(stocksFactory);
 const validator = new GetStockPriceControllerValidator(stocksFactory);
 
 const getStockPriceIntentController = new GetStockPriceIntentController(
-  sdk,
   translator,
   validator,
   stocksService,
 );
 
-export { getStockPriceIntentController };
+const alexaHandlerController = new AlexaHandlerController(
+  sdk,
+  translator,
+  getStockPriceIntentController,
+);
+
+export { alexaHandlerController };

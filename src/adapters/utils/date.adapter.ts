@@ -44,9 +44,10 @@ export class DateAdapter implements DateUtils {
 
     if (!date) {
       date = new Date();
+      date.setTime(date.getTime() - oneDay);
     }
 
-    date.setTime(date.getTime() - oneDay);
+    date = new Date(date);
 
     if (date.getDay() === 6) { // Saturday
       date.setTime(date.getTime() - oneDay); // Move back one day to Friday
