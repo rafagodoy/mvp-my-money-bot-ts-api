@@ -17,7 +17,17 @@ export class ErrorHandlerController implements AlexaVoiceController {
   }
 
   async handle(input: AlexaRequest, error): AlexaResponse {
-    console.log(`~~~~ Error handled: ${error}`);
+    if (error.name && error.message) {
+      console.error(
+        `[ALEXA API ERROR] an error ${error.name} handled: ${error.message} 
+      - From stack trace: ${error.stack}`,
+      );
+    }
+
+    if (!error.message) {
+      console.error(`[ALEXA API ERROR] an error handled from stack trace: ${error.stack}`);
+    }
+
     return this.sdk.response(input, '', error);
   }
 }
