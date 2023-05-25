@@ -3,6 +3,7 @@ import { Translator } from '@/domain/interactions';
 import { StockServiceProtocol } from '@/presentation/services/protocols';
 import { GetStockPriceValidator } from '@/presentation/validation/protocols';
 import { Slots } from '@/presentation/protocols';
+import { BadRequestError } from '@/presentation/errors';
 
 export class GetStockPriceIntentController {
 
@@ -12,17 +13,19 @@ export class GetStockPriceIntentController {
     private readonly stockService: StockServiceProtocol,
   ) { }
 
-  async isValidRequest(inputCatched): Promise<boolean> {
+  async isValidRequest(inputCatched) {
     const {
       isValidTradeDate,
       isValidCompanyName,
     } = this.validator.validateAlexaInput(inputCatched);
 
-    if (!isValidTradeDate || !isValidCompanyName) {
-      return false;
+    if (!isValidTradeDate) {
+      throw new BadRequestError('isValidTradeDate');
     }
 
-    return true;
+    if (!isValidCompanyName) {
+      throw new BadRequestError('isValidCompanyName');
+    }
   }
 
   async handle(slots: Slots): Promise<string> {
@@ -34,12 +37,7 @@ export class GetStockPriceIntentController {
       tradeDate: tradeDate?.value,
     };
 
-    const isValid = this.isValidRequest(inputCatched);
-
-    if (!isValid) {
-      return this.translator
-        .byIntentName<GetStockPriceMessageParams>('ErrorFoundIntent');
-    }
+    await this.isValidRequest(inputCatched);
 
     const { price } = await this.stockService.getStockDetails(
       inputCatched.companyName,
