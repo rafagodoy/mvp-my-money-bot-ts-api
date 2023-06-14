@@ -47,6 +47,7 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "jest": "^24.8.0",
     "nodemon": "^2.0.16",
+    "serverless-newrelic-lambda-layers": "^3.5.0",
     "serverless-plugin-typescript": "^1.1.7",
     "serverless-stack-output": "^0.2.3",
     "ts-jest": "^24.0.2",
