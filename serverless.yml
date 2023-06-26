@@ -30,3 +30,9 @@ functions:
 
 plugins:
   - serverless-offline
+
+custom:
+  newRelic:
+    accountId: ${ssm:/ENV_NEW_RELIC_ACCOUNT_ID}
+    apiKey: ${ssm:/ENV_NEW_RELIC_API_KEY}
+    enableExtension: true
