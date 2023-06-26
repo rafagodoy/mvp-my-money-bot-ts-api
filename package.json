@@ -32,7 +32,8 @@
     "aws-sdk": "^2.1255.0",
     "dotenv": "^16.0.3",
     "node-fetch": "^2.6.6",
-    "serverless-offline": "^8.8.0"
+    "serverless-offline": "^8.8.0",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
