@@ -93,50 +93,41 @@ export class NodeFetch implements API {
   }
 
   async post(request: APIRequest): Promise<APIResponse> {
-    try {
 
-      this.setAPIParams(request);
-      const apiParams = this.getAPIParams();
+    this.setAPIParams(request);
+    const apiParams = this.getAPIParams();
       
-      const response = await fetch(
-        apiParams.url,
-        {
-          ...apiParams,
-          method: 'POST',
-        },
-      );
+    const response = await fetch(
+      apiParams.url,
+      {
+        ...apiParams,
+        method: 'POST',
+      },
+    );
 
-      return {
-        status: 200,
-        body: await response.json(),
-      };
-    } catch (error) {
-      console.error(error);
-      return error;
-    }
+    return {
+      status: 200,
+      body: await response.json(),
+    };
   }
 
   async get(request: APIRequest): Promise<APIResponse> {
-    try {
 
-      this.setAPIParams(request);
-      const apiParams = this.getAPIParams();
+    this.setAPIParams(request);
+    const apiParams = this.getAPIParams();
       
-      const response = await fetch(
-        apiParams.url,
-        {
-          ...apiParams,
-          method: 'GET',
-        },
-      );
+    const response = await fetch(
+      apiParams.url,
+      {
+        ...apiParams,
+        method: 'GET',
+      },
+    );
 
-      return {
-        status: 200,
-        body: await response.json(),
-      };
-    } catch (error) {
-      console.error(error);
-      return error;
-    }
+    return {
+      status: 200,
+      body: await response.json(),
+    };
+
   }
 }
