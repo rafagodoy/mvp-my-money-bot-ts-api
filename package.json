@@ -12,6 +12,7 @@
     "start:dev": "nodemon",
     "debug": "export SLS_DEBUG=* && yarn clear && tsc && tsc-alias && concurrently \"ts-node -r tsconfig-paths/register src/main/handlers/api/index.ts\" \"sls offline start\"",
     "start:ngrok": "ngrok http 3001",
+    "start:proxy-server": "ssh -R 80:localhost:3001 serveo.net",
     "deploy:alexa-skill": "ask deploy --profile user-alexa",
     "serverless:deploy": "serverless deploy --aws-profile user-alexa",
     "postinstall": "tsc-alias setup"
@@ -29,7 +30,7 @@
   "dependencies": {
     "ask-sdk-core": "^2.12.1",
     "ask-sdk-model": "^1.39.0",
-    "aws-sdk": "^2.1255.0",
+    "aws-sdk": "^2.1409.0",
     "dotenv": "^16.0.3",
     "node-fetch": "^2.6.6",
     "serverless-offline": "^8.8.0",
@@ -46,8 +47,10 @@
     "concurrently": "^7.6.0",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
+    "https-proxy-agent": "^7.0.0",
     "jest": "^24.8.0",
     "nodemon": "^2.0.16",
+    "serverless-newrelic-lambda-layers": "^3.5.0",
     "serverless-plugin-typescript": "^1.1.7",
     "serverless-stack-output": "^0.2.3",
     "ts-jest": "^24.0.2",
