@@ -72,4 +72,9 @@ export class DateAdapter implements DateUtils {
 
     return this.parseTo[region](dateToFormat);
   }
+
+  getNowAndConvertToTimeStamp() {
+    const now = new Date();
+    return now.getTime();
+  }
 }
