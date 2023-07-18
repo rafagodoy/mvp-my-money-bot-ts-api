@@ -11,7 +11,7 @@ export class ErrorHandlerController implements AlexaVoiceController {
   constructor(
     private readonly sdk: AlexaSkillSDK,
     private readonly logs: CloudWatchLogs,
-    private readonly groupName = 'alexa-my-money-bot-errors',
+    private readonly groupName = '/aws/lambda/my-money-bot-dev-myMoneyBotSkill',
   ) {
   }
 
